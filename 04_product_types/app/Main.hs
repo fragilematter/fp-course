@@ -11,25 +11,24 @@ twotwo b = True
 
 leHead :: String -> Char
 leHead s = case s of
-            [] -> error "don't ask for head on an empty string"
-            (x:_) -> x
+    [] -> error "don't ask for head on an empty string"
+    (x:_) -> x
 
 leTail :: String -> String
 leTail s = case s of
-            [] -> error "don't chase tail of an empty string"
-            (_:x) -> x
+    [] -> error "don't chase tail of an empty string"
+    (_:x) -> x
 
 leNull :: String -> Bool
 leNull s = case s of
-            [] -> True
-            _ -> False
-
+    [] -> True
+    _ -> False
 
 leTake :: Int -> String -> String
 leTake leCount leStr = case (leCount, leStr) of
-            (0, _) -> []
-            (_, []) -> []
-            (n, s) -> leHead s : leTake (n - 1) (leTail s)
+    (0, _) -> []
+    (_, []) -> []
+    (n, s) -> leHead s : leTake (n - 1) (leTail s)
 
 leDrop :: Int -> String -> String
 leDrop leCount leStr = case (leCount, leStr) of
