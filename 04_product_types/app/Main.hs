@@ -31,11 +31,22 @@ leTake leCount leStr = case (leCount, leStr) of
             (_, []) -> []
             (n, s) -> leHead s : leTake (n - 1) (leTail s)
 
+leDrop :: Int -> String -> String
+leDrop leCount leStr = case (leCount, leStr) of
+    (_, []) -> []
+    (0, s) -> s
+    (n, s) -> leDrop (n - 1) (leTail s)
+
 main :: IO ()
 main = do
     let whereIsMyHead = leHead "hello" 
     putStrLn [whereIsMyHead]
+
     let wagYourTail = leTail "hello"
     putStrLn wagYourTail
+
     let takeOnMe = leTake 4 "take on meeeee"
     putStrLn takeOnMe
+
+    let micDrop = leDrop 4 "mic drop"
+    putStrLn micDrop
