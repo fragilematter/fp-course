@@ -36,6 +36,17 @@ leDrop leCount leStr = case (leCount, leStr) of
     (0, s) -> s
     (n, s) -> leDrop (n - 1) (leTail s)
 
+leDropWhile :: (Char -> Bool) -> String -> String
+leDropWhile leFunction leStr = case ((leFunction (leHead leStr)), leStr) of
+    (_, []) -> []
+    (False, s) -> s
+    (True, s) -> leDropWhile leFunction (leTail s)
+
+leMapString :: (Char -> Char) -> String -> String
+leMapString leFunction leStr = case leStr of 
+    [] -> []
+    _ -> [leFunction (leHead leStr)] ++ leMapString leFunction (leTail leStr)
+
 main :: IO ()
 main = do
     let whereIsMyHead = leHead "hello" 
@@ -49,3 +60,9 @@ main = do
 
     let micDrop = leDrop 4 "mic drop"
     putStrLn micDrop
+
+    let droppedWhile = leDropWhile (\x -> x == 'a') "aaaahello"
+    putStrLn droppedWhile
+
+    let mappedString = leMapString (\x -> 'x') "hiiii"
+    putStrLn mappedString
